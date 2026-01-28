@@ -22,7 +22,7 @@ RentNow is a web-based platform for renting cars and apartments. It provides a f
 
 1.  **Clone the repository:**
     ```
-    git clone https://github.com/your-username/rentnow.git
+    git clone https://github.com/Saleh-Hafyane/rental-management-php.git
     ```
 2.  **Import the database:**
     - Create a new database named `location_app` in your MySQL server.
@@ -36,4 +36,4 @@ RentNow is a web-based platform for renting cars and apartments. It provides a f
 ## Admin Credentials
 
 - **Email:** admin@example.com
-- **Password:** password
+- **Password:** Admin
