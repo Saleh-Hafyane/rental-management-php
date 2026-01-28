@@ -6,7 +6,7 @@ include "../partials/header.php";
 $type_filter = $_GET['type'] ?? '';
 $search_term = $_GET['search'] ?? '';
 
-$sql = "SELECT * FROM biens WHERE 1=1";
+$sql = "SELECT biens.*, bien_images.image_path FROM biens LEFT JOIN bien_images ON biens.id = bien_images.bien_id WHERE 1=1";
 $params = [];
 
 if ($type_filter) {
@@ -18,6 +18,8 @@ if ($search_term) {
     $sql .= " AND name LIKE ?";
     $params[] = '%' . $search_term . '%';
 }
+
+$sql .= " GROUP BY biens.id";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
@@ -52,6 +54,9 @@ $biens = $stmt->fetchAll();
         <?php foreach ($biens as $b): ?>
             <div class="col-md-4 mb-4">
                 <div class="card">
+                    <?php if ($b['image_path']): ?>
+                        <img src="<?= BASE_URL ?>uploads/biens/<?= htmlspecialchars($b['image_path']) ?>" class="card-img-top" alt="<?= htmlspecialchars($b['name']) ?>">
+                    <?php endif; ?>
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($b['name']) ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= ucfirst($b['type']) ?></h6>
